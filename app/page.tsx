@@ -10,32 +10,70 @@ const projects = [
   {
     name: "AI Classification",
     tag: "AI · BIM",
-    desc: "Classifies elements of IFC building models against specs — review UI, filtering, PDF reports.",
+    desc: "Upload an IFC building model, validate every element against classification specs — review UI, status filtering, PDF reports.",
     url: "https://ai-classification-nm3t.vercel.app/",
   },
   {
     name: "Learni",
     tag: "AI · EdTech",
-    desc: "Upload your study materials, get AI-generated quizzes. Progress synced across web and mobile.",
+    desc: "Upload PDF, DOCX or PPTX study materials and get AI-generated quizzes. Google sign-in, progress synced across web and mobile.",
     url: "https://learni-app-khaki.vercel.app/",
   },
   {
     name: "Glonozałruz",
     tag: "E-commerce",
-    desc: "Merch store for an artist on a custom domain — limited drops, cart, checkout.",
+    desc: "Merch store for an artist on a custom domain — limited drops, cart and checkout.",
     url: "https://glonozalruz.com/",
   },
   {
     name: "Damjul",
     tag: "Web · Brand",
-    desc: "Marketing site for a social media studio — bold type, scroll-driven motion.",
+    desc: "Marketing site for a social media studio — bold typography, scroll-driven motion, case studies.",
     url: "https://damianoz.vercel.app/",
   },
   {
     name: "Majkel",
     tag: "Web · Photo",
-    desc: "Minimal portfolio for a photographer, built around an endless photo wall.",
+    desc: "Minimal portfolio for a photographer, built around an endless scrolling photo wall.",
     url: "https://majkel-portfolio.vercel.app/",
+  },
+];
+
+const workProjects = [
+  {
+    name: "Construction Simulation Platform",
+    desc: "Simulates building construction progress over time — planned vs. actual state of the site on a live model.",
+    tech: ["TypeScript", ".NET", "Blazor"],
+  },
+  {
+    name: "IFC Model Classification",
+    desc: "Classifies elements of 3D building models with Graph Attention Networks combined with LLM + RAG workflows.",
+    tech: ["PyTorch", "GNN", "LLM", "RAG"],
+  },
+  {
+    name: "Construction Process System",
+    desc: "Co-developed a platform supporting key stages of the construction lifecycle, used in day-to-day operations.",
+    tech: [".NET", "C#"],
+  },
+  {
+    name: "Work-Time Reporting",
+    desc: "Designed and delivered a reporting and work-time analytics system used across the company.",
+    tech: [".NET", "Blazor", "MS SQL"],
+  },
+  {
+    name: "Excel Classification",
+    desc: "Classifies Excel-based engineering data automatically using a RAG + LLM pipeline.",
+    tech: ["Python", "RAG", "LLM"],
+  },
+  {
+    name: "Data Scraper",
+    desc: "Automated data collection and preprocessing pipelines feeding internal systems.",
+    tech: ["Python"],
+  },
+  {
+    name: "PDF Comparator",
+    desc: "Tool for comparing PDF documents — spots differences between drawing revisions.",
+    tech: ["Python"],
   },
 ];
 
@@ -162,27 +200,29 @@ export default function Home() {
                 <div className="xp-role">
                   Software Developer · <span className="xp-org">ERBUD S.A.</span>
                 </div>
-                <ul className="xp-points">
-                  <li>
-                    <strong>Construction simulation platform</strong> —
-                    simulates building progress. TypeScript, .NET, Blazor.
-                  </li>
-                  <li>
-                    <strong>IFC model classification</strong> — Graph Attention
-                    Networks + LLM/RAG workflows.
-                  </li>
-                  <li>
-                    <strong>Work-time reporting</strong> — analytics system in
-                    .NET and Blazor.
-                  </li>
-                  <li>
-                    <strong>Automation tooling</strong> — Python scrapers,
-                    RAG-based Excel classification, PDF comparison.
-                  </li>
-                </ul>
+                <p className="xp-summary">
+                  Internal systems used in day-to-day construction operations —
+                  automation that reduces manual engineering effort, shortens
+                  process lead time and improves data quality for
+                  decision-making.
+                </p>
               </div>
             </div>
           </Reveal>
+          <div className="xp-projects">
+            {workProjects.map((wp, i) => (
+              <Reveal key={wp.name} delay={(i % 3) * 0.07}>
+                <div className="xp-card">
+                  <span className="mono num">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3>{wp.name}</h3>
+                  <p>{wp.desc}</p>
+                  <span className="mono tech">{wp.tech.join(" · ")}</span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
           <Reveal>
             <div className="xp-entry">
               <div className="xp-when mono">05.2022 — 11.2022</div>
@@ -191,12 +231,11 @@ export default function Home() {
                   IT Support Engineer, Marine ·{" "}
                   <span className="xp-org">ABB Ltd</span>
                 </div>
-                <ul className="xp-points">
-                  <li>
-                    Technical support for marine IT systems in an international
-                    engineering setup.
-                  </li>
-                </ul>
+                <p className="xp-summary">
+                  Technical support for marine IT systems in an international
+                  engineering setup — incident resolution and continuity of
+                  user operations.
+                </p>
               </div>
             </div>
           </Reveal>
@@ -244,7 +283,8 @@ export default function Home() {
                 <h3>M.Eng · Applied Computer Science</h3>
                 <p>
                   University of Economics and Computer Science, Kraków.
-                  Specialisation: Artificial Intelligence.
+                  Specialisation: Artificial Intelligence. Full programme
+                  completed — defence expected in 2026.
                 </p>
               </div>
             </Reveal>
@@ -254,7 +294,7 @@ export default function Home() {
                 <h3>B.Eng · Applied Computer Science</h3>
                 <p>
                   University of Economics and Computer Science, Kraków.
-                  Specialisation: Web & Mobile Development.
+                  Specialisation: Web & Mobile Application Development.
                 </p>
               </div>
             </Reveal>
@@ -263,8 +303,8 @@ export default function Home() {
                 <span className="mono">Microsoft · MTA</span>
                 <h3>Certifications & Languages</h3>
                 <p>
-                  Software Development, Database, Networking, Security,
-                  HTML/CSS. English C1 · Polish native.
+                  MTA — Microsoft: Software Development, Database, Networking,
+                  Security, HTML/CSS Fundamentals. English C1 · Polish native.
                 </p>
               </div>
             </Reveal>
