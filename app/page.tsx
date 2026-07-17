@@ -122,6 +122,29 @@ export default function Home() {
           <span>Kraków, PL — 50.06°N 19.94°E</span>
           <span>AI/ML · Software</span>
         </div>
+        <svg className="splat" viewBox="0 0 240 240" aria-hidden="true">
+          <filter id="rough">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.42"
+              numOctaves="2"
+              seed="4"
+              result="n"
+            />
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="18" />
+          </filter>
+          <g filter="url(#rough)" fill="currentColor">
+            <circle cx="118" cy="102" r="56" />
+            <circle cx="188" cy="62" r="13" />
+            <circle cx="58" cy="55" r="8" />
+            <circle cx="203" cy="140" r="6" />
+            <circle cx="42" cy="152" r="5" />
+            <circle cx="152" cy="188" r="6" />
+            <circle cx="90" cy="185" r="4" />
+            <rect x="110" y="150" width="6" height="62" rx="3" />
+            <rect x="140" y="145" width="5" height="38" rx="2.5" />
+          </g>
+        </svg>
         <h1 className="hero-name">
           <span className="line">
             <span>Paweł</span>
@@ -136,7 +159,7 @@ export default function Home() {
           <p className="hero-intro">
             <strong>AI/ML Engineer & Software Developer.</strong> I build
             systems where machine learning meets{" "}
-            <span className="serif-i">production software</span> — from
+            <span className="hl">production software</span> — from
             classifying 3D building models to LLM-powered tools people use
             every day.
           </p>

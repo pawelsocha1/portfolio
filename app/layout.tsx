@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { Archivo, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import {
+  Archivo,
+  JetBrains_Mono,
+  Rubik_Spray_Paint,
+  Saira_Stencil_One,
+} from "next/font/google";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -8,11 +13,16 @@ const archivo = Archivo({
   axes: ["wdth"],
 });
 
-const instrument = Instrument_Serif({
+const sprayPaint = Rubik_Spray_Paint({
   subsets: ["latin", "latin-ext"],
   weight: "400",
-  style: ["normal", "italic"],
-  variable: "--instrument",
+  variable: "--spray",
+});
+
+const stencil = Saira_Stencil_One({
+  subsets: ["latin", "latin-ext"],
+  weight: "400",
+  variable: "--stencil",
 });
 
 const jetbrains = JetBrains_Mono({
@@ -39,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${instrument.variable} ${jetbrains.variable}`}
+      className={`${archivo.variable} ${sprayPaint.variable} ${stencil.variable} ${jetbrains.variable}`}
     >
       <body>{children}</body>
     </html>
