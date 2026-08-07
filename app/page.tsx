@@ -2,6 +2,12 @@ import Reveal from "./reveal";
 
 const projects = [
   {
+    name: "Mateusz Polniak",
+    tag: "Web · Portfolio",
+    desc: "Portfolio for a multidisciplinary graphic designer — branding, 3D, motion, video and print.",
+    url: "https://mateuszpolniak.pl/",
+  },
+  {
     name: "AI Classification",
     tag: "AI · BIM",
     desc: "Classifies elements of IFC building models against specs — review UI, filtering, PDF reports.",
@@ -111,7 +117,9 @@ export default function Home() {
           <Reveal>
             <div className="section-head">
               <h2>Selected Work</h2>
-              <span className="mono index">01 — 05</span>
+              <span className="mono index">
+                01 — {projects.length.toString().padStart(2, "0")}
+              </span>
             </div>
           </Reveal>
           <div className="project-list">

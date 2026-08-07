@@ -27,17 +27,28 @@
 - Consumes: the existing `projects` array and its `{ name, tag, desc, url }` object shape
 - Produces: a six-item `projects` array and a section range label derived from `projects.length`
 
-- [ ] **Step 1: Run a source-level check that demonstrates the feature is absent**
+- [x] **Step 1: Run a rendered-page check that demonstrates the feature is absent**
 
 ```powershell
-$source = Get-Content -Raw app/page.tsx
-if ($source -notmatch 'name: "Mateusz Polniak"') { throw 'Mateusz Polniak project is missing' }
-if ($source -notmatch 'projects\.length\.toString\(\)\.padStart\(2, "0"\)') { throw 'Dynamic project count is missing' }
+# Terminal A: keep this process running through Step 4.
+$env:PORT = '3100'
+npm run dev
 ```
 
-Expected: the command fails because the new entry and dynamic count are not yet present.
+After Next.js reports that the server is ready, run in Terminal B:
 
-- [ ] **Step 2: Insert the new project at the beginning of the array**
+```powershell
+$html = (curl.exe --silent --show-error --max-time 20 http://127.0.0.1:3100/) -join "`n"
+if ($LASTEXITCODE -ne 0) { throw 'Rendered page request failed' }
+$rendered = $html -replace '<!--.*?-->', ''
+if ($rendered -notmatch 'Mateusz Polniak') { throw 'Rendered project is missing' }
+if ([regex]::Matches($rendered, 'class="project-row"').Count -ne 6) { throw 'Rendered project count is not six' }
+if ($rendered -notmatch '01 — 06') { throw 'Rendered range label is incorrect' }
+```
+
+Expected: the Terminal B command fails with `Rendered project is missing` because the new entry is not yet present.
+
+- [x] **Step 2: Insert the new project at the beginning of the array**
 
 Add this object immediately after `const projects = [` in `app/page.tsx`:
 
@@ -50,7 +61,7 @@ Add this object immediately after `const projects = [` in `app/page.tsx`:
   },
 ```
 
-- [ ] **Step 3: Derive the section count from the array**
+- [x] **Step 3: Derive the section count from the array**
 
 Replace the hard-coded range label with:
 
@@ -60,17 +71,20 @@ Replace the hard-coded range label with:
 </span>
 ```
 
-- [ ] **Step 4: Re-run the source-level check**
+- [x] **Step 4: Re-run the rendered-page check**
 
 ```powershell
-$source = Get-Content -Raw app/page.tsx
-if ($source -notmatch 'name: "Mateusz Polniak"') { throw 'Mateusz Polniak project is missing' }
-if ($source -notmatch 'projects\.length\.toString\(\)\.padStart\(2, "0"\)') { throw 'Dynamic project count is missing' }
+$html = (curl.exe --silent --show-error --max-time 20 http://127.0.0.1:3100/) -join "`n"
+if ($LASTEXITCODE -ne 0) { throw 'Rendered page request failed' }
+$rendered = $html -replace '<!--.*?-->', ''
+if ($rendered -notmatch 'Mateusz Polniak') { throw 'Rendered project is missing' }
+if ([regex]::Matches($rendered, 'class="project-row"').Count -ne 6) { throw 'Rendered project count is not six' }
+if ($rendered -notmatch '01 — 06') { throw 'Rendered range label is incorrect' }
 ```
 
 Expected: the command exits successfully.
 
-- [ ] **Step 5: Run the production build**
+- [x] **Step 5: Run the production build**
 
 ```powershell
 npm run build
@@ -78,16 +92,17 @@ npm run build
 
 Expected: Next.js completes compilation, type checking, and static-page generation successfully.
 
-- [ ] **Step 6: Inspect the final diff**
+- [x] **Step 6: Stop the development server and inspect the final diff**
 
 ```powershell
+# Stop the Terminal A development server with Ctrl+C.
 git diff --check
 git diff -- app/page.tsx
 ```
 
 Expected: no whitespace errors; the diff contains only the new project object and the dynamic range label.
 
-- [ ] **Step 7: Commit the implementation**
+- [x] **Step 7: Commit the implementation**
 
 ```powershell
 git add -- app/page.tsx
