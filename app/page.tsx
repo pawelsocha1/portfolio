@@ -2,6 +2,12 @@ import Reveal from "./reveal";
 
 const projects = [
   {
+    name: "Ciche 79A Mountainhouse",
+    tag: "Web · Hospitality",
+    desc: "Rental site for a modern year-round house at the foot of the Tatras — space, surroundings and booking via Booking.com & Airbnb.",
+    url: "https://mountainhouse79a.pl/",
+  },
+  {
     name: "Mateusz Polniak",
     tag: "Web · Portfolio",
     desc: "Portfolio for a multidisciplinary graphic designer — branding, 3D, motion, video and print.",
