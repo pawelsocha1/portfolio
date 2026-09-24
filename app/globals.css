@@ -153,6 +153,22 @@ nav {
   opacity: 1;
 }
 
+.nav-links .lang-switch {
+  padding: 0.15em 0.5em;
+  margin: -0.15em 0;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+}
+
+@media (max-width: 480px) {
+  .nav-links {
+    gap: 1.25rem;
+  }
+  .nav-links .nav-optional {
+    display: none;
+  }
+}
+
 /* ---- hero ---- */
 .hero {
   min-height: 100svh;
